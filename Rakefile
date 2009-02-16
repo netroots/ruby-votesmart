@@ -1,25 +1,20 @@
-%w[rubygems rake rake/clean fileutils newgem rubigen].each { |f| require f }
+%w[rubygems rake rake/clean fileutils].each { |f| require f }
 require 'spec'
 require 'spec/rake/spectask'
 require File.dirname(__FILE__) + '/lib/project_vote_smart'
 
-# Generate all the Rake tasks
-# Run 'rake -T' to see list of generated tasks (from gem root directory)
-$hoe = Hoe.new('project_vote_smart', ProjectVoteSmart::VERSION) do |p|
-  p.developer('FIXME full name', 'FIXME email')
-  p.changes              = p.paragraphs_of("History.txt", 0..1).join("\n\n")
-  p.rubyforge_name       = p.name # TODO this is default value
-  # p.extra_deps         = [
-  #   ['activesupport','>= 2.0.2'],
-  # ]
-  p.extra_dev_deps = [
-    ['newgem', ">= #{::Newgem::VERSION}"]
-  ]
-  
-  p.clean_globs |= %w[**/.DS_Store tmp *.log]
-  path = (p.rubyforge_name == p.name) ? p.rubyforge_name : "\#{p.rubyforge_name}/\#{p.name}"
-  p.remote_rdoc_dir = File.join(path.gsub(/^#{p.rubyforge_name}\/?/,''), 'rdoc')
-  p.rsync_args = '-av --delete --ignore-errors'
+begin
+  require 'jeweler'
+  Jeweler::Tasks.new do |s|
+    s.name = "ruby-votesmart"
+    s.summary = "A wrapper for the Project Vote Smart API"
+    s.email = "dancunning@gmail.com"
+    s.homepage = "http://github.com/netroots/ruby-votesmart"
+    s.description = "A wrapper for the Project Vote Smart API"
+    s.authors = ["Dan Cunning"]
+  end
+rescue LoadError
+  puts "Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"
 end
 
 Dir['tasks/**/*.rake'].each { |t| load t }
