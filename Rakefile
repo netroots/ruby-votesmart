@@ -1,7 +1,7 @@
 %w[rubygems rake rake/clean fileutils].each { |f| require f }
 require 'spec'
 require 'spec/rake/spectask'
-require File.dirname(__FILE__) + '/lib/project_vote_smart'
+require File.dirname(__FILE__) + '/lib/ruby-votesmart'
 
 begin
   require 'jeweler'

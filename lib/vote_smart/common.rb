@@ -3,7 +3,7 @@ require 'cgi'
 require 'net/http'
 require 'ym4r/google_maps/geocoding'
 
-module ProjectVoteSmart
+module VoteSmart
   
   class Common
     
@@ -53,9 +53,9 @@ module ProjectVoteSmart
       json
     end
     
-    # Constructs a ProjectVoteSmart API-friendly URL
+    # Constructs a VoteSmart API-friendly URL
     def self.construct_url(api_method, params = {})
-      "#{API_URL}#{api_method}?key=#{ProjectVoteSmart.api_key}&o=#{API_FORMAT}#{hash2get(params)}"
+      "#{API_URL}#{api_method}?key=#{VoteSmart.api_key}&o=#{API_FORMAT}#{hash2get(params)}"
     end
     
     # Converts a hash to a GET string

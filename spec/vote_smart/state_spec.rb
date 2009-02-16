@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
-module ProjectVoteSmart
+module VoteSmart
   describe State do
   
     describe "all" do

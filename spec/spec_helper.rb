@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'stringio'
 require 'spec'
-require "#{File.dirname(__FILE__)}/../lib/project_vote_smart.rb"
+require "#{File.dirname(__FILE__)}/../lib/ruby-votesmart.rb"
 
 class Spec::Example::ExampleGroup
   
@@ -15,23 +15,23 @@ class Spec::Example::ExampleGroup
   
   before :each do
     
-    ProjectVoteSmart::Common.stub!(:request).and_throw("request not stubbed!")
+    VoteSmart::Common.stub!(:request).and_throw("request not stubbed!")
     
-    [ProjectVoteSmart::Address,
-     ProjectVoteSmart::Candidate,
-     ProjectVoteSmart::CandidateBio,
-     ProjectVoteSmart::Committee,
-     ProjectVoteSmart::District,
-     ProjectVoteSmart::Election,
-     ProjectVoteSmart::Leadership,
-     ProjectVoteSmart::Local,
-     ProjectVoteSmart::Measure,
-     ProjectVoteSmart::Npat,
-     ProjectVoteSmart::Office,
-     ProjectVoteSmart::Official,
-     ProjectVoteSmart::Rating,
-     ProjectVoteSmart::State,
-     ProjectVoteSmart::Vote].each do |klazz|
+    [VoteSmart::Address,
+     VoteSmart::Candidate,
+     VoteSmart::CandidateBio,
+     VoteSmart::Committee,
+     VoteSmart::District,
+     VoteSmart::Election,
+     VoteSmart::Leadership,
+     VoteSmart::Local,
+     VoteSmart::Measure,
+     VoteSmart::Npat,
+     VoteSmart::Office,
+     VoteSmart::Official,
+     VoteSmart::Rating,
+     VoteSmart::State,
+     VoteSmart::Vote].each do |klazz|
       
       request_methods = klazz.methods.collect { |method| method if method.starts_with?("get_") }.compact
       

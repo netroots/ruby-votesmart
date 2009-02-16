@@ -1,4 +1,4 @@
-module ProjectVoteSmart
+module VoteSmart
   
   class CandidateBio < Common
     

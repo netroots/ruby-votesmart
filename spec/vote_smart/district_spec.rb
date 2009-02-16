@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
-module ProjectVoteSmart
+module VoteSmart
   describe District do
   
     describe "find_all_by_office_and_state" do
