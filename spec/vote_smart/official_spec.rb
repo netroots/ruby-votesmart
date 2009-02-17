@@ -12,7 +12,7 @@ module VoteSmart
       it_should_find :item => {:last_name => "Isakson", :id => "1721"}
     end
     
-    describe "offices" do
+    describe "multiple offices" do
       
       def do_find
         @official = Official.find_by_district_id("20451")
@@ -21,6 +21,16 @@ module VoteSmart
       
       it_should_find :count => 5, :first => {:address => {:type => "District"}},
                                   :last  => {:address => {:type => "Washington, D.C."}}
+    end
+    
+    describe "one office" do
+      
+      def do_find
+        @official = Official.find_by_district_id("21397")
+        @official.offices
+      end
+      
+      it_should_find :count => 1, :first => {:address => {:type => "Capitol"}}
     end
     
     describe "find by address" do

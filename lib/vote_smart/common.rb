@@ -41,6 +41,11 @@ module VoteSmart
       response || {}
     end
     
+    def self.response_child_array response, *children
+      child = response_child response, *children
+      child.kind_of?(Array) ? child : [child]
+    end
+    
     def self.request(api_method, params = {})
       url = construct_url api_method, params
       
