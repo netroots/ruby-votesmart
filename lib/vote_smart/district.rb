@@ -4,6 +4,8 @@ module VoteSmart
     
     attr_accessor :id, :name, :office_id, :state_id
     
+    attr_accessor :office
+    
     set_attribute_map "districtId" => :id, "name" => :name, "officeId" => :office_id, "stateId" => :state_id
     
     def number

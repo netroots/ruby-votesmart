@@ -4,12 +4,16 @@ module VoteSmart
     
     attr_accessor :id, :type_id, :level_id, :branch_id, :name, :title, :short_title
     
+    attr_accessor :office
+    
     set_attribute_map "officeId" => :id, "officeTypeId" => :type_id, "officeLevelId" => :level_id,
                       "officeBranchId" => :branch_id, "name" => :name, "title" => :title, "shortTitle" => :short_title
     
     def districts_by_state_id state_id
       @districts_by_state ||= {}
-      @districts_by_state[state_id] ||= District.find_all_by_office_id_and_state_id(self.id, state_id)
+      districts = District.find_all_by_office_id_and_state_id(self.id, state_id)
+      districts.each { |district| district.office = self }
+      @districts_by_state[state_id] ||= districts
     end
     
     def district_by_state_id_and_number state_id, number
@@ -20,7 +24,9 @@ module VoteSmart
     
     def official_by_state_id state_id
       @official_by_state ||= {}
-      @official_by_state[state_id] ||= Official.find_by_office_id_and_state_id(self.id, state_id)
+      official = Official.find_by_office_id_and_state_id(self.id, state_id)
+      official.office = self if official
+      @official_by_state[state_id] ||= official
     end
     
     def self.all
