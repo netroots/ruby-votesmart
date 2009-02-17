@@ -27,6 +27,7 @@ module VoteSmart
     def self.find_by_district district
       official = find_by_district_id district.id
       official.district = district if official
+      official.office = district.office if official
       official
     end
     
@@ -47,6 +48,9 @@ module VoteSmart
     
     def self.find_all_by_address address, city, state, zip
       placemark = Geocoding.get("#{address} #{city}, #{state} #{zip}").first
+      
+      return [] unless placemark
+      
       state ||= placemark.administrative_area
       
       placemark ? find_all_by_state_and_latitude_and_longitude(state, placemark.latitude, placemark.longitude) : []
