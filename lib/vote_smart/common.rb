@@ -86,7 +86,7 @@ module VoteSmart
       if response.class == Net::HTTPOK
         result = JSON.parse(response.body)
       else
-        raise RequestFailed.new("Request was not OK: #{response.class}: #{response.body}")
+        raise RequestFailed.new("Request was not OK: #{response.class}: #{url} #{response.body}")
       end
       
     end # self.get_json_data

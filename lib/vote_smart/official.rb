@@ -5,7 +5,7 @@ module VoteSmart
     attr_accessor :id, :first_name, :nick_name, :middle_name, :last_name, :suffix, :title,
                   :election_parties, :office_parties, :district_id, :district_name, :state_id
     
-    attr_accessor :district, :office
+    attr_accessor :district, :office, :office_id
     
     set_attribute_map "candidateId" => :id, "firstName" => :first_name, "nickName" => :nick_name,
                       "middleName" => :middle_name, "lastName" => :last_name, "suffix" => :suffix,
@@ -18,6 +18,10 @@ module VoteSmart
     
     def inspect
       "Official: " + [title, first_name, last_name].compact.join(' ')
+    end
+    
+    def office_id
+      @office_id || (office.id if office)
     end
     
     def self.find_by_district district
@@ -33,13 +37,18 @@ module VoteSmart
     
     def self.find_by_office_id_and_state_id office_id, state_id
       response = response_child(get_by_office_state(office_id, state_id), "candidateList", "candidate")
-      Official.new(response) unless response.empty?
+      official = Official.new(response) unless response.empty?
+      official.office_id = office_id if official
+      official.state_id ||= state_id if official
+      official
     end
     
     
     
     def self.find_all_by_address address, city, state, zip
       placemark = Geocoding.get("#{address} #{city}, #{state} #{zip}").first
+      state ||= placemark.administrative_area
+      
       placemark ? find_all_by_state_and_latitude_and_longitude(state, placemark.latitude, placemark.longitude) : []
     end
 

@@ -19,11 +19,18 @@ def gem_available_on_server?
   }
 end
 
+def gem_is_in_specfile?
+  fetcher = Gem::SpecFetcher.new
+  specs = fetcher.load_specs(URI.parse('http://gems.github.com/'), 'specs')
+  specs.any?{|(name, spec)| name == @gem_name and spec.version.to_s == @gem_spec.version.to_s }
+end
+
+
 is_built = false
 
 while not is_built
   
-  if gem_available_on_server?
+  if gem_available_on_server? && gem_is_in_specfile?
     is_built = true
     system "say 'gem is built'"
   else
