@@ -10,7 +10,7 @@ module VoteSmart
     set_attribute_map "candidateId" => :id, "firstName" => :first_name, "nickName" => :nick_name,
                       "middleName" => :middle_name, "lastName" => :last_name, "suffix" => :suffix,
                       "title" => :title, "electionParties" => :election_parties, "officeDistrictId" => :district_id,
-                      "officeDistrictName" => :district_name, "officeStateId" => :state_id
+                      "officeDistrictName" => :district_name, "officeParties" => :officeParties, "officeStateId" => :state_id
     
     def offices
       Official.response_child_array(Address.get_office(self.id), "address", "office").collect {|office| CandidateOffice.new(office) }
