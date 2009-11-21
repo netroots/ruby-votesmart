@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'stringio'
 require 'spec'
-require "#{File.dirname(__FILE__)}/../lib/ruby-votesmart.rb"
+require "votesmart"
 
 class Spec::Example::ExampleGroup
   
