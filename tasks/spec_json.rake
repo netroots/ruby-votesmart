@@ -17,6 +17,7 @@ namespace :spec do
   end
   
   task :json do
+    require "#{File.dirname(__FILE__)}/../lib/vote_smart"
     # response = VoteSmart::State.get_state("GA")
     # save_json_response "authorization_failed", response
     
