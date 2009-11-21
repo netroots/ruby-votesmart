@@ -52,7 +52,7 @@ module VoteSmart
       end
       
       def do_find
-        Official.find_all_by_address "123 fake st", "atlanta", "ga", "30303"
+        Official.find_all_by_address "123 fake st", "atlanta", "GA", "30303"
       end
       
       it_should_find :count => 5, :first => {:last_name => "Handel", :title => "Secretary"},
