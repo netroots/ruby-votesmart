@@ -5,12 +5,12 @@ module VoteSmart
     attr_accessor :id, :first_name, :nick_name, :middle_name, :last_name, :suffix, :title,
                   :election_parties, :office_parties, :district_id, :district_name, :state_id
     
-    attr_accessor :district, :office, :office_id
+    attr_accessor :district, :office, :office_id, :party
     
     set_attribute_map "candidateId" => :id, "firstName" => :first_name, "nickName" => :nick_name,
                       "middleName" => :middle_name, "lastName" => :last_name, "suffix" => :suffix,
                       "title" => :title, "electionParties" => :election_parties, "officeDistrictId" => :district_id,
-                      "officeDistrictName" => :district_name, "officeParties" => :officeParties, "officeStateId" => :state_id
+                      "officeDistrictName" => :district_name, "officeParties" => :party, "officeStateId" => :state_id
     
     def offices
       Official.response_child_array(Address.get_office(self.id), "address", "office").collect {|office| CandidateOffice.new(office) }
