@@ -1,6 +1,6 @@
 require 'json'
 require 'cgi'
-require 'net/http'
+require 'patron'
 require 'ym4r/google_maps/geocoding'
 
 module VoteSmart
@@ -65,13 +65,17 @@ module VoteSmart
       end.compact.join
     end
 
+    def self.session
+      @session ||= Patron::Session.new
+    end
+
     # Use the Net::HTTP and JSON libraries to make the API call
     #
     # Usage:
     #   District.get_json_data("http://someurl.com")    # returns Hash of data or nil
     def self.get_json_data(url)
-      response = Net::HTTP.get_response(URI.parse(url))
-      if response.class != Net::HTTPOK
+      response = session.get(url)
+      if response.status != 200
         raise RequestFailed.new("Request was not OK: #{response.class}: #{url} #{response.body}")
       end
       JSON.parse(response.body)

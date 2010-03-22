@@ -9,6 +9,7 @@ begin
     s.homepage = "http://github.com/Empact/votesmart"
     s.description = "A wrapper for the Project Vote Smart API"
     s.authors = ["Dan Cunning", "Ben Woosley"]
+    s.add_dependency 'patron', '>=0.4.6'
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError

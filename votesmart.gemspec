@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Dan Cunning", "Ben Woosley"]
-  s.date = %q{2010-03-21}
+  s.date = %q{2010-03-22}
   s.description = %q{A wrapper for the Project Vote Smart API}
   s.email = %q{ben.woosley@gmail.com}
   s.extra_rdoc_files = [
@@ -102,9 +102,12 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
+      s.add_runtime_dependency(%q<patron>, [">= 0.4.6"])
     else
+      s.add_dependency(%q<patron>, [">= 0.4.6"])
     end
   else
+    s.add_dependency(%q<patron>, [">= 0.4.6"])
   end
 end
 
