@@ -40,12 +40,7 @@ module VoteSmart
       
       response || {}
     end
-    
-    def self.response_child_array response, *children
-      child = response_child response, *children
-      child.kind_of?(Array) ? child : [child]
-    end
-    
+
     def self.request(api_method, params = {})
       url = construct_url api_method, params
       
@@ -65,31 +60,22 @@ module VoteSmart
     
     # Converts a hash to a GET string
     def self.hash2get(h)
-      
-      get_string = ""
-      
-      h.each_pair do |key, value|
-        get_string += "&#{key.to_s}=#{CGI::escape(value.to_s)}" unless value.nil?
-      end
-      
-      get_string
-      
-    end # def hash2get
-    
-    
+      h.map do |(key, value)|
+        "&#{key.to_s}=#{CGI::escape(value.to_s)}" if value
+      end.compact.join
+    end
+
     # Use the Net::HTTP and JSON libraries to make the API call
     #
     # Usage:
     #   District.get_json_data("http://someurl.com")    # returns Hash of data or nil
     def self.get_json_data(url)
       response = Net::HTTP.get_response(URI.parse(url))
-      if response.class == Net::HTTPOK
-        result = JSON.parse(response.body)
-      else
+      if response.class != Net::HTTPOK
         raise RequestFailed.new("Request was not OK: #{response.class}: #{url} #{response.body}")
       end
-      
-    end # self.get_json_data
+      JSON.parse(response.body)
+    end
     
   end
   

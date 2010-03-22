@@ -13,7 +13,10 @@ module VoteSmart
                       "officeDistrictName" => :district_name, "officeParties" => :party, "officeStateId" => :state_id
     
     def offices
-      Official.response_child_array(Address.get_office(self.id), "address", "office").collect {|office| CandidateOffice.new(office) }
+      offices = Official.response_child(Address.get_office(self.id), "address", "office")
+      (offices.is_a?(Array) ? offices : [offices]).collect {|office| 
+        CandidateOffice.new(office)
+      }
     end
     
     def inspect

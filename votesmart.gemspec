@@ -16,7 +16,8 @@ Gem::Specification.new do |s|
     "README.rdoc"
   ]
   s.files = [
-    "History.txt",
+    ".gitignore",
+     "History.txt",
      "README.rdoc",
      "Rakefile",
      "VERSION.yml",
@@ -45,7 +46,6 @@ Gem::Specification.new do |s|
      "lib/vote_smart/state.rb",
      "lib/vote_smart/vote.rb",
      "lib/votesmart.rb",
-     "ruby-votesmart.gemspec",
      "script/autospec",
      "script/console",
      "script/destroy",
@@ -81,7 +81,8 @@ Gem::Specification.new do |s|
      "spec/vote_smart/office_spec.rb",
      "spec/vote_smart/official_spec.rb",
      "spec/vote_smart/state_spec.rb",
-     "tasks/spec_json.rake"
+     "tasks/spec_json.rake",
+     "votesmart.gemspec"
   ]
   s.homepage = %q{http://github.com/Empact/votesmart}
   s.rdoc_options = ["--charset=UTF-8"]
