@@ -9,7 +9,7 @@ module VoteSmart
     
     # Returns a list of SIGs with ratings in category and state
     def self.get_sig_list category_id, state_id = 'NA'
-      request("Rating.getSigList", "category_id" => category_id, "stateId" => state_id)
+      request("Rating.getSigList", "categoryId" => category_id, "stateId" => state_id)
     end
     
     # Returns detailed SIG information
