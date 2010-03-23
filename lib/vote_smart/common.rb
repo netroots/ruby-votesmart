@@ -78,7 +78,17 @@ module VoteSmart
       if response.status != 200
         raise RequestFailed.new("Request was not OK: #{response.class}: #{url} #{response.body}")
       end
+      @json_retries = 0
       JSON.parse(response.body)
+    rescue
+      @json_retries ||= 0
+      if @json_retries < 3
+        puts "Retrying #{url}"
+        @json_retries += 1
+        retry
+      end
+      @json_retries = 0
+      raise
     end
     
   end
