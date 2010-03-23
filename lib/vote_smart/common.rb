@@ -82,8 +82,9 @@ module VoteSmart
       JSON.parse(response.body)
     rescue
       @json_retries ||= 0
-      if @json_retries < 3
+      if @json_retries < 5
         puts "Retrying #{url}"
+        sleep(2 ** @json_retries)
         @json_retries += 1
         retry
       end
