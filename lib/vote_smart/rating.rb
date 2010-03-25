@@ -16,6 +16,9 @@ module VoteSmart
     def self.get_sig sig_id
       result = request("Rating.getSig", "sigId" => sig_id)
       # PVS return utf control codes for punction in descriptions
+      if result['sig']['description'].first == '"'
+        result['sig']['description'] = result['sig']['description'][1..-2]
+      end
       result['sig']['description'] = result['sig']['description'].unpack("U*").map do |char|
         case char
         when 146 # 0092
