@@ -14,7 +14,21 @@ module VoteSmart
     
     # Returns detailed SIG information
     def self.get_sig sig_id
-      request("Rating.getSig", "sigId" => sig_id)
+      result = request("Rating.getSig", "sigId" => sig_id)
+      # PVS return utf control codes for punction in descriptions
+      result['sig']['description'] = result['sig']['description'].unpack("U*").map do |char|
+        case char
+        when 146 # 0092
+          39
+        when 148, 147 # 0093,4
+          34
+        when 150, 151 # 0096,7
+          45
+        else
+          char
+        end
+      end.pack("U*")
+      result
     end
     
     # Returns an SIG's rating on a specific candidate
