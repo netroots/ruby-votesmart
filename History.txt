@@ -1,3 +1,19 @@
+== 0.3.0 2010-03-25
+
+* 3 major enhancement:
+  * Rename the project/gem to just 'votesmart'
+  * Move http access to Patron for performance
+  * Add retry logic on HTTP failure, with exponential backoff
+
+* 2 minor enhancements:
+  * Add Official#party to reflect the PVS officeParties data
+  * Sig descriptions:
+    * sometimes included UTF control characters for punctuation, which are now translated to ascii
+    * often started and ended in a quote, which is now avoided
+
+* 1 bug fix:
+  * Fix that Rating.get_sig_list would blow up on a bad parameter
+
 == 0.0.1 2009-02-10
 
 * 1 major enhancement:

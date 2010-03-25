@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{votesmart}
-  s.version = "0.2.4"
+  s.version = "0.3.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Dan Cunning", "Ben Woosley"]
-  s.date = %q{2010-03-22}
+  s.date = %q{2010-03-25}
   s.description = %q{A wrapper for the Project Vote Smart API}
   s.email = %q{ben.woosley@gmail.com}
   s.extra_rdoc_files = [
@@ -73,6 +73,7 @@ Gem::Specification.new do |s|
      "spec/responses/Official.get_by_office_state.44.GA.js",
      "spec/responses/Official.get_by_office_state.45.GA.js",
      "spec/responses/Official.get_by_office_state.53.GA.js",
+     "spec/responses/Rating.get_sig.1863.js",
      "spec/responses/State.get_state.GA.js",
      "spec/responses/State.get_state_ids.js",
      "spec/responses/authorization_failed.js",
@@ -80,6 +81,7 @@ Gem::Specification.new do |s|
      "spec/vote_smart/district_spec.rb",
      "spec/vote_smart/office_spec.rb",
      "spec/vote_smart/official_spec.rb",
+     "spec/vote_smart/rating_spec.rb",
      "spec/vote_smart/state_spec.rb",
      "tasks/spec_json.rake",
      "votesmart.gemspec"
@@ -94,6 +96,7 @@ Gem::Specification.new do |s|
      "spec/vote_smart/district_spec.rb",
      "spec/vote_smart/office_spec.rb",
      "spec/vote_smart/official_spec.rb",
+     "spec/vote_smart/rating_spec.rb",
      "spec/vote_smart/state_spec.rb"
   ]
 
