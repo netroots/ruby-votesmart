@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{votesmart}
-  s.version = "0.3.0"
+  s.version = "0.3.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Dan Cunning", "Ben Woosley"]
-  s.date = %q{2010-03-25}
+  s.date = %q{2010-06-19}
   s.description = %q{A wrapper for the Project Vote Smart API}
   s.email = %q{ben.woosley@gmail.com}
   s.extra_rdoc_files = [
@@ -89,7 +89,7 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://github.com/Empact/votesmart}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.6}
+  s.rubygems_version = %q{1.3.7}
   s.summary = %q{A wrapper for the Project Vote Smart API}
   s.test_files = [
     "spec/spec_helper.rb",
@@ -104,7 +104,7 @@ Gem::Specification.new do |s|
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
 
-    if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
+    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<patron>, [">= 0.4.6"])
     else
       s.add_dependency(%q<patron>, [">= 0.4.6"])

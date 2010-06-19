@@ -1,3 +1,9 @@
+== 0.3.1 2010-06-19
+
+* 2 major enhancements:
+  * Add Candidate.get_by_zip, District.get_by_zip, Election.get_by_zip and Official.get_by_zip (dwillis)
+  * Add Official.get_statewide (empact)
+
 == 0.3.0 2010-03-25
 
 * 3 major enhancement:
