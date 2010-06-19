@@ -47,8 +47,6 @@ module VoteSmart
       official
     end
     
-    
-    
     def self.find_all_by_address address, city, state, zip
       placemark = Geocoding.get("#{address} #{city}, #{state} #{zip}").first
       
@@ -101,6 +99,9 @@ module VoteSmart
       officials
     end
     
+    def self.get_statewide(state_id = 'NA')
+      request("Officials.getStatewide", "stateId" => state_id)
+    end
     
     # Returns a list of incumbents that fit the criteria
     def self.get_by_office_state office_id, state_id = 'NA'
