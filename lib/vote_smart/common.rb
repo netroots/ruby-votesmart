@@ -66,7 +66,9 @@ module VoteSmart
     end
 
     def self.session
-      @session ||= Patron::Session.new
+      @session ||= Patron::Session.new.tap do |session|
+        session.timeout = 15
+      end
     end
 
     # Use the Net::HTTP and JSON libraries to make the API call
