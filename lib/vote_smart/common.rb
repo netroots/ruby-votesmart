@@ -9,14 +9,75 @@ module VoteSmart
     
     class << self
       attr_reader :attribute_map
+
+      def set_attribute_map map
+        @attribute_map = map
+      end
+
+      def response_child response, *children
+        for child in children
+          response = response[child] if response
+        end
+
+        response || {}
+      end
+
+      def request(api_method, params = {})
+        url = construct_url api_method, params
+
+        json = get_json_data(url)
+
+        if json['error'] and json['error']['errorMessage'] == 'Authorization failed'
+          raise RequestFailed.new(json['error']['errorMessage'])
+        end
+
+        json
+      end
+
+      # Constructs a VoteSmart API-friendly URL
+      def construct_url(api_method, params = {})
+        "#{API_URL}#{api_method}?key=#{VoteSmart.api_key}&o=#{API_FORMAT}#{hash2get(params)}"
+      end
+
+      # Converts a hash to a GET string
+      def hash2get(h)
+        h.map do |(key, value)|
+          "&#{key.to_s}=#{CGI::escape(value.to_s)}" if value
+        end.compact.join
+      end
+
+      def session
+        @session ||= Patron::Session.new.tap do |session|
+          session.timeout = 15
+        end
+      end
+
+      # Use the Net::HTTP and JSON libraries to make the API call
+      #
+      # Usage:
+      #   District.get_json_data("http://someurl.com")    # returns Hash of data or nil
+      def get_json_data(url)
+        response = session.get(url)
+        if response.status != 200
+          raise RequestFailed.new("Request was not OK: #{response.class}: #{url} #{response.body}")
+        end
+        JSON.parse(response.body)
+      rescue
+        @json_retries ||= 0
+        if @json_retries < 5
+          puts "Retrying #{url}"
+          sleep(2 ** @json_retries)
+          @json_retries += 1
+          retry
+        end
+        raise
+      ensure
+        @json_retries = 0
+      end
     end
     
     def initialize attributes = {}
       update_attributes attributes
-    end
-    
-    def self.set_attribute_map map
-      @attribute_map = map
     end
     
     def update_attributes attributes
@@ -32,68 +93,7 @@ module VoteSmart
         end
       end
     end
-    
-    def self.response_child response, *children
-      for child in children
-        response = response[child] if response
-      end
-      
-      response || {}
-    end
 
-    def self.request(api_method, params = {})
-      url = construct_url api_method, params
-      
-      json = get_json_data(url)
-      
-      if json['error'] and json['error']['errorMessage'] == 'Authorization failed'
-        raise RequestFailed.new(json['error']['errorMessage'])
-      end
-      
-      json
-    end
-    
-    # Constructs a VoteSmart API-friendly URL
-    def self.construct_url(api_method, params = {})
-      "#{API_URL}#{api_method}?key=#{VoteSmart.api_key}&o=#{API_FORMAT}#{hash2get(params)}"
-    end
-    
-    # Converts a hash to a GET string
-    def self.hash2get(h)
-      h.map do |(key, value)|
-        "&#{key.to_s}=#{CGI::escape(value.to_s)}" if value
-      end.compact.join
-    end
-
-    def self.session
-      @session ||= Patron::Session.new.tap do |session|
-        session.timeout = 15
-      end
-    end
-
-    # Use the Net::HTTP and JSON libraries to make the API call
-    #
-    # Usage:
-    #   District.get_json_data("http://someurl.com")    # returns Hash of data or nil
-    def self.get_json_data(url)
-      response = session.get(url)
-      if response.status != 200
-        raise RequestFailed.new("Request was not OK: #{response.class}: #{url} #{response.body}")
-      end
-      JSON.parse(response.body)
-    rescue
-      @json_retries ||= 0
-      if @json_retries < 5
-        puts "Retrying #{url}"
-        sleep(2 ** @json_retries)
-        @json_retries += 1
-        retry
-      end
-      raise
-    ensure
-      @json_retries = 0
-    end
-    
   end
   
 end
