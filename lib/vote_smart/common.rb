@@ -4,11 +4,43 @@ require 'patron'
 require 'ym4r/google_maps/geocoding'
 
 module VoteSmart
-  
+  module ParallelQueries
+    def session
+      @session ||= Typhoeus::Hydra.new
+    end
+
+    def request(api_method, params = {})
+      raise "on_complete block required" unless block_given?
+
+      url = construct_url api_method, params
+
+      new_request = Typhoeus::Request.new(url)
+      new_request.on_complete do |response|
+        json = JSON.parse(response.body)
+
+        if json['error'] and json['error']['errorMessage'] == 'Authorization failed'
+          raise RequestFailed.new(json['error']['errorMessage'])
+        end
+
+        yield json
+      end
+      session.queue new_request
+    end
+
+    def run
+      session.run
+    end
+  end
+
   class Common
     
     class << self
       attr_reader :attribute_map
+
+      def parallelize!
+        gem 'typhoeus'
+        extend ParallelQueries
+      end
 
       def set_attribute_map map
         @attribute_map = map
@@ -22,18 +54,6 @@ module VoteSmart
         response || {}
       end
 
-      def request(api_method, params = {})
-        url = construct_url api_method, params
-
-        json = get_json_data(url)
-
-        if json['error'] and json['error']['errorMessage'] == 'Authorization failed'
-          raise RequestFailed.new(json['error']['errorMessage'])
-        end
-
-        json
-      end
-
       # Constructs a VoteSmart API-friendly URL
       def construct_url(api_method, params = {})
         "#{API_URL}#{api_method}?key=#{VoteSmart.api_key}&o=#{API_FORMAT}#{hash2get(params)}"
@@ -44,6 +64,18 @@ module VoteSmart
         h.map do |(key, value)|
           "&#{key.to_s}=#{CGI::escape(value.to_s)}" if value
         end.compact.join
+      end
+
+      def request(api_method, params = {})
+        url = construct_url api_method, params
+
+        json = get_json_data(url)
+
+        if json['error'] and json['error']['errorMessage'] == 'Authorization failed'
+          raise RequestFailed.new(json['error']['errorMessage'])
+        end
+
+        json
       end
 
       def session
