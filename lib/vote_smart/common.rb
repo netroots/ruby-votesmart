@@ -16,6 +16,7 @@ module VoteSmart
 
       new_request = Typhoeus::Request.new(url)
       new_request.on_complete do |response|
+        next if response.body.size < 2
         json = JSON.parse(response.body)
 
         if json['error'] and json['error']['errorMessage'] == 'Authorization failed'
