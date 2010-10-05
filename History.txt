@@ -1,3 +1,8 @@
+== 0.3.2 2010-10-05
+
+* 1 major enhancement
+  * Add support for parallel requests via Typhoeus.  Currently only available on Candiate.get_bio and Rating.get_candidate_rating
+
 == 0.3.1 2010-06-19
 
 * 2 major enhancements:
