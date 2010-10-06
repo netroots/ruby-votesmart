@@ -6,7 +6,7 @@ require 'ym4r/google_maps/geocoding'
 module VoteSmart
   module ParallelQueries
     def session
-      @session ||= Typhoeus::Hydra.new
+      @session ||= Typhoeus::Hydra.new(:max_concurrency => 20)
     end
 
     def request(api_method, params = {})
