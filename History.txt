@@ -1,3 +1,8 @@
+== 0.3.3 2010-10-06
+
+* 1 minor enhancement:
+  * Rate-limit parallel requests to 20/second. Note that higher rates is acceptable for off hours, as per Clinton Adams, 2010-10-06: "Could you lower that to 20/second if it's occurring between 8AM-8PM EST?  In the off hours 200/second is fine."
+
 == 0.3.2 2010-10-05
 
 * 1 major enhancement
