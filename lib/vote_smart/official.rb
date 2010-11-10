@@ -48,7 +48,7 @@ module VoteSmart
     end
     
     def self.find_all_by_address address, city, state, zip
-      placemark = Geocoding.get("#{address} #{city}, #{state} #{zip}").first
+      placemark = Ym4r::GoogleMaps::Geocoding.get("#{address} #{city}, #{state} #{zip}").first
       
       return [] unless placemark
       

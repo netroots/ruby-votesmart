@@ -1,7 +1,6 @@
 require 'rubygems'
 require 'ym4r/google_maps/geocoding'
 require 'active_support'
-include Ym4r::GoogleMaps
 
 module VoteSmart
   API_URL = "http://api.votesmart.org/"
