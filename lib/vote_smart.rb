@@ -1,4 +1,3 @@
-require 'rubygems'
 require 'ym4r/google_maps/geocoding'
 require 'active_support'
 
