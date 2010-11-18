@@ -48,6 +48,8 @@ module VoteSmart
     end
     
     def self.find_all_by_address address, city, state, zip
+      require 'ym4r/google_maps/geocoding'
+
       placemark = Ym4r::GoogleMaps::Geocoding.get("#{address} #{city}, #{state} #{zip}").first
       
       return [] unless placemark
@@ -58,6 +60,8 @@ module VoteSmart
     end
 
     def self.find_all_by_state_and_latitude_and_longitude state, latitude, longitude
+      require "#{File.dirname(__FILE__)}/../mcll4r/mcll4r"
+
       response = Mcll4r.new.district_lookup(latitude, longitude)
       response = response["response"] if response
 

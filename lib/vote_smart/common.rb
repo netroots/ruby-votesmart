@@ -1,7 +1,6 @@
 require 'json'
 require 'cgi'
 require 'patron'
-require 'ym4r/google_maps/geocoding'
 
 module VoteSmart
   module ParallelQueries
