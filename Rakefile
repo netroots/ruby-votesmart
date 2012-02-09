@@ -12,6 +12,7 @@ Jeweler::Tasks.new do |s|
   s.add_development_dependency 'rspec', '<2.0.0'
   s.add_development_dependency 'rake'
   s.add_development_dependency 'jeweler'
+  s.add_development_dependency 'ym4r' # optional runtime dependency, required for tests
 end
 Jeweler::GemcutterTasks.new
 

@@ -40,6 +40,8 @@ module VoteSmart
     
     describe "find by address" do
       before :each do
+        require 'ym4r/google_maps/geocoding'
+
         mcll4r = {"response" => {"state_lower" => {"district" => "1"}, "state_upper" => {"district" => "2"}}}
         Ym4r::GoogleMaps::Geocoding.should_receive(:get).once.and_return([mock("placemark", :latitude => 2, :longitude => 10)])
         Mcll4r.should_receive(:new).once.and_return(mock("mcll4r", :district_lookup => mcll4r))

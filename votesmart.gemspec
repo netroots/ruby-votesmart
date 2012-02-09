@@ -101,6 +101,7 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<rspec>, ["< 2.0.0"])
       s.add_development_dependency(%q<rake>, [">= 0"])
       s.add_development_dependency(%q<jeweler>, [">= 0"])
+      s.add_development_dependency(%q<ym4r>, [">= 0"])
     else
       s.add_dependency(%q<votesmart>, [">= 0"])
       s.add_dependency(%q<rspec>, ["< 2.0.0"])
@@ -108,6 +109,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<rspec>, ["< 2.0.0"])
       s.add_dependency(%q<rake>, [">= 0"])
       s.add_dependency(%q<jeweler>, [">= 0"])
+      s.add_dependency(%q<ym4r>, [">= 0"])
     end
   else
     s.add_dependency(%q<votesmart>, [">= 0"])
@@ -116,6 +118,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<rspec>, ["< 2.0.0"])
     s.add_dependency(%q<rake>, [">= 0"])
     s.add_dependency(%q<jeweler>, [">= 0"])
+    s.add_dependency(%q<ym4r>, [">= 0"])
   end
 end
 
