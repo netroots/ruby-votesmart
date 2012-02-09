@@ -1,5 +1,3 @@
-require 'active_support'
-
 module VoteSmart
   API_URL = "http://api.votesmart.org/"
   API_FORMAT = "JSON"
