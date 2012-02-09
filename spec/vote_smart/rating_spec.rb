@@ -8,8 +8,8 @@ describe VoteSmart::Rating do
 
     it "shouldn't have a quoted description" do
       description = VoteSmart::Rating.get_sig('1863')['sig']['description']
-      description.first.should_not == '"'
-      description.last.should_not == '"'
+      description[0].should_not == '"'
+      description[-1].should_not == '"'
     end
   end
 end
