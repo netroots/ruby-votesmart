@@ -1,22 +1,19 @@
 %w[rubygems rake rake/clean fileutils].each { |f| require f }
 
-begin
-  require 'jeweler'
-  Jeweler::Tasks.new do |s|
-    s.name = "votesmart"
-    s.summary = "A wrapper for the Project Vote Smart API"
-    s.email = "ben.woosley@gmail.com"
-    s.homepage = "http://github.com/Empact/votesmart"
-    s.description = "A wrapper for the Project Vote Smart API"
-    s.authors = ["Dan Cunning", "Ben Woosley"]
-    s.add_dependency 'patron', '>=0.4.6'
-    s.add_development_dependency 'rspec', '<2.0.0'
-    s.add_development_dependency 'rake'
-  end
-  Jeweler::GemcutterTasks.new
-rescue LoadError
-  puts "Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"
+require 'jeweler'
+Jeweler::Tasks.new do |s|
+  s.name = "votesmart"
+  s.summary = "A wrapper for the Project Vote Smart API"
+  s.email = "ben.woosley@gmail.com"
+  s.homepage = "http://github.com/Empact/votesmart"
+  s.description = "A wrapper for the Project Vote Smart API"
+  s.authors = ["Dan Cunning", "Ben Woosley"]
+  s.add_dependency 'patron', '>=0.4.6'
+  s.add_development_dependency 'rspec', '<2.0.0'
+  s.add_development_dependency 'rake'
+  s.add_development_dependency 'jeweler'
 end
+Jeweler::GemcutterTasks.new
 
 Dir['tasks/**/*.rake'].each { |t| load t }
 
