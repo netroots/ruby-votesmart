@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../spec_helper'
+require 'spec_helper'
 
 describe VoteSmart::Rating do
   describe ".get_sig" do
