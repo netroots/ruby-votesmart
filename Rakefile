@@ -30,7 +30,6 @@ Dir['tasks/**/*.rake'].each { |t| load t }
 #   spec.rcov = true
 # end
 
-task :spec => :check_dependencies
 
 task :default => :spec
 
