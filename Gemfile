@@ -11,4 +11,5 @@ group :development do
 
   # optional runtime dependencies, required for tests
   gem 'ym4r'
+  gem 'mcll4r'
 end

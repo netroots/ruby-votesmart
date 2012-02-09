@@ -21,10 +21,6 @@ Gem::Specification.new do |s|
     "README.rdoc",
     "Rakefile",
     "VERSION.yml",
-    "lib/mcll4r/MIT-LICENSE",
-    "lib/mcll4r/README",
-    "lib/mcll4r/mcll4r.rb",
-    "lib/mcll4r/mcll4r_test.rb",
     "lib/vote_smart.rb",
     "lib/vote_smart/address.rb",
     "lib/vote_smart/candidate.rb",
@@ -100,12 +96,14 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<bundler>, ["~> 1.0.0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.8.3"])
       s.add_development_dependency(%q<ym4r>, [">= 0"])
+      s.add_development_dependency(%q<mcll4r>, [">= 0"])
     else
       s.add_dependency(%q<patron>, [">= 0.4.6"])
       s.add_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_dependency(%q<bundler>, ["~> 1.0.0"])
       s.add_dependency(%q<jeweler>, ["~> 1.8.3"])
       s.add_dependency(%q<ym4r>, [">= 0"])
+      s.add_dependency(%q<mcll4r>, [">= 0"])
     end
   else
     s.add_dependency(%q<patron>, [">= 0.4.6"])
@@ -113,6 +111,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<bundler>, ["~> 1.0.0"])
     s.add_dependency(%q<jeweler>, ["~> 1.8.3"])
     s.add_dependency(%q<ym4r>, [">= 0"])
+    s.add_dependency(%q<mcll4r>, [">= 0"])
   end
 end
 

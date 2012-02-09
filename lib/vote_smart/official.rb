@@ -60,7 +60,7 @@ module VoteSmart
     end
 
     def self.find_all_by_state_and_latitude_and_longitude state, latitude, longitude
-      require "#{File.dirname(__FILE__)}/../mcll4r/mcll4r"
+      require "mcll4r"
 
       response = Mcll4r.new.district_lookup(latitude, longitude)
       response = response["response"] if response
