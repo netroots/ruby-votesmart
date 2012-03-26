@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "votesmart"
-  s.version = "0.4.0"
+  s.version = "0.4.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Dan Cunning", "Ben Woosley"]
-  s.date = "2012-02-09"
+  s.date = "2012-03-26"
   s.description = "A wrapper for the Project Vote Smart API"
   s.email = "ben.woosley@gmail.com"
   s.extra_rdoc_files = [
@@ -75,6 +75,7 @@ Gem::Specification.new do |s|
     "spec/responses/authorization_failed.js",
     "spec/spec_helper.rb",
     "spec/vote_smart/district_spec.rb",
+    "spec/vote_smart/office/type_spec.rb",
     "spec/vote_smart/office_spec.rb",
     "spec/vote_smart/official_spec.rb",
     "spec/vote_smart/rating_spec.rb",
@@ -84,7 +85,7 @@ Gem::Specification.new do |s|
   ]
   s.homepage = "http://github.com/Empact/votesmart"
   s.require_paths = ["lib"]
-  s.rubygems_version = "1.8.10"
+  s.rubygems_version = "1.8.11"
   s.summary = "A wrapper for the Project Vote Smart API"
 
   if s.respond_to? :specification_version then
@@ -92,6 +93,7 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<patron>, [">= 0.4.6"])
+      s.add_development_dependency(%q<rspec>, ["< 2"])
       s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_development_dependency(%q<bundler>, ["~> 1.0.0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.8.3"])
@@ -99,6 +101,7 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<mcll4r>, [">= 0"])
     else
       s.add_dependency(%q<patron>, [">= 0.4.6"])
+      s.add_dependency(%q<rspec>, ["< 2"])
       s.add_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_dependency(%q<bundler>, ["~> 1.0.0"])
       s.add_dependency(%q<jeweler>, ["~> 1.8.3"])
@@ -107,6 +110,7 @@ Gem::Specification.new do |s|
     end
   else
     s.add_dependency(%q<patron>, [">= 0.4.6"])
+    s.add_dependency(%q<rspec>, ["< 2"])
     s.add_dependency(%q<rdoc>, ["~> 3.12"])
     s.add_dependency(%q<bundler>, ["~> 1.0.0"])
     s.add_dependency(%q<jeweler>, ["~> 1.8.3"])
