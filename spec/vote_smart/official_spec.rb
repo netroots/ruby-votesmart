@@ -40,6 +40,7 @@ module VoteSmart
     
     describe "find by address" do
       before :each do
+        require 'mcll4r'
         require 'ym4r/google_maps/geocoding'
 
         mcll4r = {"response" => {"state_lower" => {"district" => "1"}, "state_upper" => {"district" => "2"}}}
