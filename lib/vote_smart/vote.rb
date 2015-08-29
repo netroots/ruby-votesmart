@@ -37,9 +37,10 @@ module VoteSmart
       request("Votes.getBillsByYearState", "year" => year, "stateId" => state_id)
     end
     
+
     # Gets a list of bills that fit the criteria
-    def self.get_bills_by_official_year can_id, year
-      request("Votes.getBillsByOfficialYear", "candidateId" => can_id, "year" => year)
+    def self.get_bills_by_official_year_office can_id, year
+      request("Votes.getBillsByOfficialYearOffice", "candidateId" => can_id, "year" => year)
     end
     
     # Gets a list of bills that fit the criteria
