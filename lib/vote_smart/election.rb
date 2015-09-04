@@ -17,5 +17,9 @@ module VoteSmart
       request("Election.getStageCandidates", "electionId" => election_id, "stageId" => stage_id, "party" => party)
     end
     
+    # Returns elections in the provided zip code, with optional zip+4 and election_year
+    def self.get_by_zip zip5, zip4=nil, election_year=nil
+      request("Election.getElectionByZip", "zip5" => zip5, "zip4" => zip4, "year" => election_year)
+    end
   end
 end

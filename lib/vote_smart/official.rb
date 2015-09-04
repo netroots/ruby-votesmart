@@ -5,15 +5,18 @@ module VoteSmart
     attr_accessor :id, :first_name, :nick_name, :middle_name, :last_name, :suffix, :title,
                   :election_parties, :office_parties, :district_id, :district_name, :state_id
     
-    attr_accessor :district, :office, :office_id
+    attr_accessor :district, :office, :office_id, :party
     
     set_attribute_map "candidateId" => :id, "firstName" => :first_name, "nickName" => :nick_name,
                       "middleName" => :middle_name, "lastName" => :last_name, "suffix" => :suffix,
                       "title" => :title, "electionParties" => :election_parties, "officeDistrictId" => :district_id,
-                      "officeDistrictName" => :district_name, "officeStateId" => :state_id
+                      "officeDistrictName" => :district_name, "officeParties" => :party, "officeStateId" => :state_id
     
     def offices
-      Official.response_child_array(Address.get_office(self.id), "address", "office").collect {|office| CandidateOffice.new(office) }
+      offices = Official.response_child(Address.get_office(self.id), "address", "office")
+      (offices.is_a?(Array) ? offices : [offices]).collect {|office| 
+        CandidateOffice.new(office)
+      }
     end
     
     def inspect
@@ -44,10 +47,10 @@ module VoteSmart
       official
     end
     
-    
-    
     def self.find_all_by_address address, city, state, zip
-      placemark = Geocoding.get("#{address} #{city}, #{state} #{zip}").first
+      require 'ym4r/google_maps/geocoding'
+
+      placemark = Ym4r::GoogleMaps::Geocoding.get("#{address} #{city}, #{state} #{zip}").first
       
       return [] unless placemark
       
@@ -57,6 +60,8 @@ module VoteSmart
     end
 
     def self.find_all_by_state_and_latitude_and_longitude state, latitude, longitude
+      require "mcll4r"
+
       response = Mcll4r.new.district_lookup(latitude, longitude)
       response = response["response"] if response
 
@@ -98,6 +103,9 @@ module VoteSmart
       officials
     end
     
+    def self.get_statewide(state_id = 'NA')
+      request("Officials.getStatewide", "stateId" => state_id)
+    end
     
     # Returns a list of incumbents that fit the criteria
     def self.get_by_office_state office_id, state_id = 'NA'
@@ -123,6 +131,10 @@ module VoteSmart
     def self.get_by_district district_id
       request("Officials.getByDistrict", "districtId" => district_id)
     end
-    
+
+    # Returns incumbents in the provided zip code, with optional zip+4 and stage
+    def self.get_by_zip zip5, election_year=nil, zip4=nil, stage_id=nil
+      request("Officials.getByZip", "zip5" => zip5, "electionYear" => election_year, "zip4" => zip4, "stageId" => stage_id)
+    end
   end
 end

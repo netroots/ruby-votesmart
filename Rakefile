@@ -1,26 +1,38 @@
 %w[rubygems rake rake/clean fileutils].each { |f| require f }
-require 'spec'
-require 'spec/rake/spectask'
-require File.dirname(__FILE__) + '/lib/ruby-votesmart'
 
-begin
-  require 'jeweler'
-  Jeweler::Tasks.new do |s|
-    s.name = "ruby-votesmart"
-    s.summary = "A wrapper for the Project Vote Smart API"
-    s.email = "dancunning@gmail.com"
-    s.homepage = "http://github.com/netroots/ruby-votesmart"
-    s.description = "A wrapper for the Project Vote Smart API"
-    s.authors = ["Dan Cunning"]
-  end
-rescue LoadError
-  puts "Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"
+require 'jeweler'
+Jeweler::Tasks.new do |s|
+  s.name = "votesmart"
+  s.summary = "A wrapper for the Project Vote Smart API"
+  s.email = "ben.woosley@gmail.com"
+  s.homepage = "http://github.com/Empact/votesmart"
+  s.description = "A wrapper for the Project Vote Smart API"
+  s.authors = ["Dan Cunning", "Ben Woosley"]
 end
+Jeweler::GemcutterTasks.new
 
 Dir['tasks/**/*.rake'].each { |t| load t }
 
-Spec::Rake::SpecTask.new
+require 'spec/rake/spectask'
+Spec::Rake::SpecTask.new(:spec) do |spec|
+  spec.libs << 'lib' << 'spec'
+  spec.spec_files = FileList['spec/**/*_spec.rb']
+end
 
-#Cucumber::Rake::Task.new
+Spec::Rake::SpecTask.new(:rcov) do |spec|
+  spec.libs << 'lib' << 'spec'
+  spec.pattern = 'spec/**/*_spec.rb'
+  spec.rcov = true
+end
 
-#task :default => [:features]
+task :default => :spec
+
+require 'rdoc/task'
+RDoc::Task.new do |rdoc|
+  version = File.exist?('VERSION') ? File.read('VERSION') : ""
+
+  rdoc.rdoc_dir = 'rdoc'
+  rdoc.title = "votesmart #{version}"
+  rdoc.rdoc_files.include('README*')
+  rdoc.rdoc_files.include('lib/**/*.rb')
+end

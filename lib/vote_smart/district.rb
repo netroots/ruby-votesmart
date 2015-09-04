@@ -33,6 +33,10 @@ module VoteSmart
     def self.get_by_office_state office_id, state_id = 'NA', district_name = ''
       request("District.getByOfficeState", "officeId" => office_id, "stateId" => state_id, "districtName" => district_name)
     end
-    
+
+    # Returns districts in the provided zip code, with optional zip+4
+    def self.get_by_zip zip5, zip4=nil
+      request("District.getByZip", "zip5" => zip5, "zip4" => zip4)
+    end
   end
 end

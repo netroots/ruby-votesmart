@@ -17,6 +17,7 @@ namespace :spec do
   end
   
   task :json do
+    require "#{File.dirname(__FILE__)}/../lib/vote_smart"
     # response = VoteSmart::State.get_state("GA")
     # save_json_response "authorization_failed", response
     
@@ -57,7 +58,7 @@ namespace :spec do
     
     # save_json VoteSmart::Address, :get_office, "106446"
     
-    save_json VoteSmart::Official, :get_by_office_state, "12", "CO"
+    # save_json VoteSmart::Official, :get_by_office_state, "12", "CO"
+    save_json VoteSmart::Rating, :get_sig, "1863"
   end
-  
 end

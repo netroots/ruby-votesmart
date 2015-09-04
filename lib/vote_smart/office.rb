@@ -67,7 +67,7 @@ module VoteSmart
     
     # Returns a list of offices by office type
     def self.get_offices_by_type type_id
-      request("Office.getOfficesByType", "typeId" => type_id)
+      request("Office.getOfficesByType", "officeTypeId" => type_id)
     end
     
     # Returns a list of offices by level of government
@@ -77,7 +77,7 @@ module VoteSmart
     
     # Returns a list of offices by office type and level of government
     def self.get_offices_by_type_level type_id, level_id
-      request("Office.getOfficesByType", "levelId" => level_id, "typeId" => type_id)
+      request("Office.getOfficesByTypeLevel", "levelId" => level_id, "officeTypeId" => type_id)
     end
     
     # Returns a list of offices by branch and level of government

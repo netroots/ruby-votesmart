@@ -1,7 +1,6 @@
-require 'rubygems'
 require 'stringio'
 require 'spec'
-require "#{File.dirname(__FILE__)}/../lib/ruby-votesmart.rb"
+require "votesmart"
 
 class Spec::Example::ExampleGroup
   
@@ -33,7 +32,7 @@ class Spec::Example::ExampleGroup
      VoteSmart::State,
      VoteSmart::Vote].each do |klazz|
       
-      request_methods = klazz.methods.collect { |method| method if method.starts_with?("get_") }.compact
+      request_methods = klazz.methods.collect { |method| method if method.to_s.start_with?("get_") }.compact
       
       request_methods.each do |request_method|
         
